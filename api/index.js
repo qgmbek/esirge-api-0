@@ -4,8 +4,8 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
-const statesRoutes = require("./api/routes/states");
-const orderRoutes = require("./api/routes/orders");
+const statesRoutes = require("./routes/states");
+const orderRoutes = require("./routes/orders");
 
 mongoose.connect(
   "mongodb+srv://hogambek011:ON6z1Ur0eDpSAbKw@esirge-api.mrk4fem.mongodb.net/?retryWrites=true&w=majority"
