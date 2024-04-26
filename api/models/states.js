@@ -12,10 +12,10 @@ const statesSchema = mongoose.Schema({
     qaghans: { type: String, required: true},
     religion: { type: String, required: true},
     language: { type: String, required: true},
-    etymology: { type: String, required: true},
-    history: { type: String, required: true},
-    administration: { type: String, required: true},
-    economy: { type: String, required: true},
+    etymology: { type: String},
+    history: { type: String},
+    administration: { type: String},
+    economy: { type: String},
 });
 
 module.exports = mongoose.model('States', statesSchema);
