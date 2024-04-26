@@ -34,7 +34,7 @@ const States = require("../models/states");
 // GET request 
 router.get("/", (req, res, next) => {
   States.find()
-    .select("name capital banner map legislature area tamga qaghans religion language _id")
+    .select("name capital banner map legislature area tamga qaghans religion language etymology history administration economy _id")
     .exec()
     .then(docs => {
       const response = {
@@ -101,6 +101,10 @@ router.post("/", upload.fields([{ name: 'map', maxCount: 1 }, { name: 'tamga', m
         createdState: {
             name: result.name,
             capital: result.capital,
+            etymology: result.etymology,
+            history: result.history,
+            administration: result.administration,
+            economy: result.economy,
             _id: result._id,
             request: {
                 type: 'GET',
@@ -121,7 +125,7 @@ router.post("/", upload.fields([{ name: 'map', maxCount: 1 }, { name: 'tamga', m
 router.get("/:stateId", (req, res, next) => {
   const id = req.params.stateId;
   States.findById(id)
-    .select('name capital banner map legislature area tamga qaghans religion language _id')
+    .select('name capital banner map legislature area tamga qaghans religion language etymology history administration economy _id')
     .exec()
     .then(doc => {
       console.log("From database", doc);
