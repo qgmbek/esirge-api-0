@@ -34,7 +34,7 @@ const States = require("../models/states");
 // GET request 
 router.get("/", (req, res, next) => {
   States.find()
-    .select("name capital banner map legislature area tamga qaghans religion language etymology history administration economy _id")
+    .select("name capital banner map legislature area tamga qaghans religion language etymology history administration economy id")
     .exec()
     .then(docs => {
       const response = {
