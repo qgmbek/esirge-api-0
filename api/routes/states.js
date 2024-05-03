@@ -76,7 +76,7 @@ router.get("/", (req, res, next) => {
 
 router.post("/", upload.fields([{ name: 'map', maxCount: 1 }, { name: 'tamga', maxCount: 1 }]), (req, res, next) => {
   const state = new States({
-    _id: new mongoose.Types.ObjectId(),
+    id: new mongoose.Types.ObjectId(),
     name: req.body.name,
     capital: req.body.capital,
     banner: req.body.banner,
@@ -125,7 +125,7 @@ router.post("/", upload.fields([{ name: 'map', maxCount: 1 }, { name: 'tamga', m
 router.get("/:stateId", (req, res, next) => {
   const id = req.params.stateId;
   States.findById(id)
-    .select('name capital banner map legislature area tamga qaghans religion language etymology history administration economy _id')
+    .select('name capital banner map legislature area tamga qaghans religion language etymology history administration economy id')
     .exec()
     .then(doc => {
       console.log("From database", doc);
