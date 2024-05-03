@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const statesSchema = mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId,
+    id: mongoose.Schema.Types.ObjectId,
     name: { type: String, required: true },
     capital: { type: String, required: true},
     banner: { type: String, required: true},
