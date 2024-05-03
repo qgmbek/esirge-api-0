@@ -55,7 +55,7 @@ router.get("/", (req, res, next) => {
             history: doc.history,
             administration: doc.administration,
             economy: doc.economy,
-            _id: doc._id,
+            id: doc.id,
             request: {
               type: "GET",
               url: "http://localhost:3000/states/" + doc._id
@@ -105,7 +105,7 @@ router.post("/", upload.fields([{ name: 'map', maxCount: 1 }, { name: 'tamga', m
             history: result.history,
             administration: result.administration,
             economy: result.economy,
-            _id: result._id,
+            id: result.id,
             request: {
                 type: 'GET',
                 url: "http://localhost:3000/states/" + result._id
@@ -156,7 +156,7 @@ router.patch("/:stateId", (req, res, next) => {
   for (const ops of req.body) {
     updateOps[ops.propName] = ops.value;
   }
-  States.updateOne({ _id: id }, { $set: updateOps })
+  States.updateOne({ id: id }, { $set: updateOps })
     .exec()
     .then(result => {
       res.status(200).json({
@@ -178,7 +178,7 @@ router.patch("/:stateId", (req, res, next) => {
 // DELETE request
 router.delete("/:stateId", (req, res, next) => {
   const id = req.params.stateId;
-  States.deleteOne({ _id: id })
+  States.deleteOne({ id: id })
     .exec()
     .then(result => {
       res.status(200).json({
