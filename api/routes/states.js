@@ -34,13 +34,14 @@ const States = require("../models/states");
 // GET request 
 router.get("/", (req, res, next) => {
   States.find()
-    .select("name capital banner map legislature area tamga qaghans religion language etymology history administration economy _id")
+    .select("coverImage name capital banner map legislature area tamga qaghans religion language etymology history administration economy _id")
     .exec()
     .then(docs => {
       const response = {
         count: docs.length,
         states: docs.map(doc => {
           return {
+            coverImage: doc.coverImage,
             name: doc.name,
             capital: doc.capital,
             banner: doc.banner,
@@ -74,12 +75,13 @@ router.get("/", (req, res, next) => {
 });
 
 
-router.post("/", upload.fields([{ name: 'map', maxCount: 1 }, { name: 'tamga', maxCount: 1 }]), (req, res, next) => {
+router.post("/", upload.fields([{ name: 'map', maxCount: 1 }, { name: 'tamga', maxCount: 1 }, { name: 'coverImage', maxCount: 1 }, { name: 'banner', maxCount: 1 } ]), (req, res, next) => {
   const state = new States({
     _id: new mongoose.Types.ObjectId(),
+    coverImage: req.files['coverImage'][0].path,
     name: req.body.name,
     capital: req.body.capital,
-    banner: req.body.banner,
+    banner: req.files['banner'][0].path,
     map: req.files['map'][0].path,
     legislature: req.body.legislature,
     area: req.body.area,
@@ -125,7 +127,7 @@ router.post("/", upload.fields([{ name: 'map', maxCount: 1 }, { name: 'tamga', m
 router.get("/:stateId", (req, res, next) => {
   const id = req.params.stateId;
   States.findById(id)
-    .select('name capital banner map legislature area tamga qaghans religion language etymology history administration economy _id')
+    .select('coverImage name capital banner map legislature area tamga qaghans religion language etymology history administration economy _id')
     .exec()
     .then(doc => {
       console.log("From database", doc);
